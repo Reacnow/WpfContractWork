@@ -1,0 +1,54 @@
+﻿<Page x:Class="WpfContractWork.Pages.PageEmployeesAdd"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfContractWork.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageEmployeesAdd">
+
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="ФИО"
+                           Margin="5" Width="200"/>
+                <TextBox Text="{Binding FIO}" Name="TxtFio" Background="AntiqueWhite" Width="150"
+                         Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Адрес"
+                           Margin="5" Width="200"/>
+                <TextBox Text="{Binding adress}" Name="TxtAdr" Background="AntiqueWhite" Width="150" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Номер телефона"
+                           Margin="5" Width="200"/>
+                <TextBox Text="{Binding phone}" Name="TxtNum" Background="AntiqueWhite" Width="150" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Должность"
+                           Margin="5" Width="200"/>
+                <TextBox Text="{Binding post}" Name="TxtPt" Background="AntiqueWhite" Width="150" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Оклад"
+                           Margin="5" Width="200"/>
+                <TextBox Text="{Binding salary}" Name="TxtSal" Background="AntiqueWhite" Width="150" Margin="5"/>
+            </StackPanel>
+            <Button Name="BtnSave" Width="80" Height="80" Click="BtnSave_Click"
+                    Margin="15"  BorderBrush="White" Background="#77DDE7" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btnsave.png" Stretch="Fill"/>
+            </Button>
+            <Button Name="BtnBack" BorderBrush="White" Background="#77DDE7" Width="80" Click="BtnBack_Click" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btnback.png" Stretch="Fill"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

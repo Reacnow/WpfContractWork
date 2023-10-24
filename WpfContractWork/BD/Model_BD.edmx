@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Contract_WorkModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_of_conclusion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ending_date" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="summ" Type="money" Nullable="false" />
+          <Property Name="id_status" Type="int" Nullable="false" />
+          <Property Name="id_type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contract_Status">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id_employee" />
+          </Key>
+          <Property Name="id_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="post" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="salary" Type="money" Nullable="false" />
+          <Property Name="photo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Responsible">
+          <Key>
+            <PropertyRef Name="id_responsible" />
+          </Key>
+          <Property Name="id_responsible" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="id_employee" Type="int" Nullable="false" />
+          <Property Name="fio" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_Of_Contract">
+          <Key>
+            <PropertyRef Name="id_type" />
+          </Key>
+          <Property Name="id_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Contract_Contract_Status">
+          <End Role="Contract_Status" Type="Self.Contract_Status" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract_Status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Type_Of_Contract">
+          <End Role="Type_Of_Contract" Type="Self.Type_Of_Contract" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Of_Contract">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responsible_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Responsible" Type="Self.Responsible" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="Responsible">
+              <PropertyRef Name="code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responsible_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Responsible" Type="Self.Responsible" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="Responsible">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Contract_WorkModelContainer">
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract_Status" EntityType="Self.Contract_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Responsible" EntityType="Self.Responsible" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_Of_Contract" EntityType="Self.Type_Of_Contract" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Contract_Contract_Status" Association="Self.FK_Contract_Contract_Status">
+            <End Role="Contract_Status" EntitySet="Contract_Status" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Type_Of_Contract" Association="Self.FK_Contract_Type_Of_Contract">
+            <End Role="Type_Of_Contract" EntitySet="Type_Of_Contract" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responsible_Contract" Association="Self.FK_Responsible_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Responsible" EntitySet="Responsible" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responsible_Employee" Association="Self.FK_Responsible_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Responsible" EntitySet="Responsible" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Contract_WorkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date_of_conclusion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ending_date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="summ" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="id_status" Type="Int32" Nullable="false" />
+          <Property Name="id_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contract_Status" Relationship="Self.FK_Contract_Contract_Status" FromRole="Contract" ToRole="Contract_Status" />
+          <NavigationProperty Name="Responsible" Relationship="Self.FK_Responsible_Contract" FromRole="Contract" ToRole="Responsible" />
+          <NavigationProperty Name="Type_Of_Contract" Relationship="Contract_WorkModel.FK_Contract_Type_Of_Contract" FromRole="Contract" ToRole="Type_Of_Contract" />
+        </EntityType>
+        <EntityType Name="Contract_Status">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_Contract_Status" FromRole="Contract_Status" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="Responsible">
+          <Key>
+            <PropertyRef Name="id_responsible" />
+          </Key>
+          <Property Name="id_responsible" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="id_employee" Type="Int32" Nullable="false" />
+          <Property Name="fio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Responsible_Contract" FromRole="Responsible" ToRole="Contract" />
+          <NavigationProperty Name="Employee" Relationship="Contract_WorkModel.FK_Responsible_Employee" FromRole="Responsible" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Contract_Contract_Status">
+          <End Role="Contract_Status" Type="Self.Contract_Status" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract_Status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responsible_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Responsible" Type="Self.Responsible" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="Responsible">
+              <PropertyRef Name="code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Contract_WorkEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contract" EntityType="Self.Contract" />
+          <EntitySet Name="Contract_Status" EntityType="Self.Contract_Status" />
+          <EntitySet Name="Responsible" EntityType="Self.Responsible" />
+          <AssociationSet Name="FK_Contract_Contract_Status" Association="Self.FK_Contract_Contract_Status">
+            <End Role="Contract_Status" EntitySet="Contract_Status" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responsible_Contract" Association="Self.FK_Responsible_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Responsible" EntitySet="Responsible" />
+          </AssociationSet>
+          <EntitySet Name="Type_Of_Contract" EntityType="Contract_WorkModel.Type_Of_Contract" />
+          <AssociationSet Name="FK_Contract_Type_Of_Contract" Association="Contract_WorkModel.FK_Contract_Type_Of_Contract">
+            <End Role="Type_Of_Contract" EntitySet="Type_Of_Contract" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <EntitySet Name="Employee" EntityType="Contract_WorkModel.Employee" />
+          <AssociationSet Name="FK_Responsible_Employee" Association="Contract_WorkModel.FK_Responsible_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Responsible" EntitySet="Responsible" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Type_Of_Contract">
+          <Key>
+            <PropertyRef Name="id_type" />
+          </Key>
+          <Property Name="id_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contract" Relationship="Contract_WorkModel.FK_Contract_Type_Of_Contract" FromRole="Type_Of_Contract" ToRole="Contract" />
+        </EntityType>
+        <Association Name="FK_Contract_Type_Of_Contract">
+          <End Type="Contract_WorkModel.Type_Of_Contract" Role="Type_Of_Contract" Multiplicity="1" />
+          <End Type="Contract_WorkModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Of_Contract">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id_employee" />
+          </Key>
+          <Property Name="id_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="post" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="salary" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Responsible" Relationship="Contract_WorkModel.FK_Responsible_Employee" FromRole="Employee" ToRole="Responsible" />
+        </EntityType>
+        <Association Name="FK_Responsible_Employee">
+          <End Type="Contract_WorkModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Contract_WorkModel.Responsible" Role="Responsible" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="Responsible">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Contract_WorkModelContainer" CdmEntityContainer="Contract_WorkEntities">
+          <EntitySetMapping Name="Contract">
+            <EntityTypeMapping TypeName="Contract_WorkModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="date_of_conclusion" ColumnName="date_of_conclusion" />
+                <ScalarProperty Name="ending_date" ColumnName="ending_date" />
+                <ScalarProperty Name="summ" ColumnName="summ" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="id_type" ColumnName="id_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contract_Status">
+            <EntityTypeMapping TypeName="Contract_WorkModel.Contract_Status">
+              <MappingFragment StoreEntitySet="Contract_Status">
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responsible">
+            <EntityTypeMapping TypeName="Contract_WorkModel.Responsible">
+              <MappingFragment StoreEntitySet="Responsible">
+                <ScalarProperty Name="id_responsible" ColumnName="id_responsible" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="fio" ColumnName="fio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_Of_Contract">
+            <EntityTypeMapping TypeName="Contract_WorkModel.Type_Of_Contract">
+              <MappingFragment StoreEntitySet="Type_Of_Contract">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id_type" ColumnName="id_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="Contract_WorkModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="post" ColumnName="post" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,88 @@
+﻿<Page x:Class="WpfContractWork.Pages.PageContracts"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfContractWork.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1000"
+      Title="PageContracts" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Grid.Column="1"
+                  Name="dtgContract"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+            <DataGridTextColumn
+                Header="Название" Width="*"
+                Binding="{Binding title}"/>
+            <DataGridTextColumn
+                Header="Дата заключения" Width="*"
+                Binding="{Binding date_of_conclusion}"/>
+            <DataGridTextColumn
+                Header="Дата окончания" Width="*"
+                Binding="{Binding ending_date}"/>
+            <DataGridTextColumn
+                Header="Сумма" Width="*"
+                Binding="{Binding summ}"/>
+            <DataGridTextColumn
+                Header="Статус договора" Width="*"
+                Binding="{Binding Contract_Status.status}"/>
+            <DataGridTextColumn
+                Header="Тип договора" Width="*"
+                Binding="{Binding Type_Of_Contract.title}"/>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="BtnEdit" BorderBrush="White" Background="#77DDE7" Width="80" HorizontalAlignment="Center"  Click="BtnEdit_Click" Style="{StaticResource RoundButton}">
+                                <Image Source="/Resourses/btnremake.png" Stretch="Fill"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Vertical"
+                    VerticalAlignment="Top">
+            <TextBlock Text="Фильтры" HorizontalAlignment="Left"/>
+            <TextBlock Text="Фильтр по типу договора" Margin="5"/>
+            <ComboBox Name="CmbTypeCon"
+                      SelectionChanged="CmbTypeCon_SelectionChanged">
+            </ComboBox>
+            <TextBlock Text="Фильтр по статусу договора" Width="300" Margin="5"/>
+            <ComboBox Name="CmbStatCon"
+                      SelectionChanged="CmbStatCon_SelectionChanged"/>
+            <TextBlock Text="Сортировка по сумме"
+                           Width="270"/>
+            <RadioButton Content="Минимальная"
+                             Name="RbUp"
+                             Checked="RbUp_Checked"/>
+            <RadioButton Content="Максимальная"
+                             Name="RbDown"
+                             Checked="RbDown_Checked"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical"
+                    VerticalAlignment="Bottom">
+            <TextBlock Text="Добавление" HorizontalAlignment="Center"/>
+            <Button Name="BtnAdd" BorderBrush="White" Background="#77DDE7" Width="80" HorizontalAlignment="Center"  Click="BtnAdd_Click" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btnadd.png" Stretch="Fill"/>
+            </Button>
+            <TextBlock Text="Удаление" HorizontalAlignment="Center"/>
+            <Button Name="BtnDelete" BorderBrush="White" Background="#77DDE7" Width="80" HorizontalAlignment="Center"  Click="BtnDelete_Click" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btndelete.png" Stretch="Fill"/>
+            </Button>
+            <TextBlock Text="Сброс фильтров" HorizontalAlignment="Center"/>
+            <Button Name="BtnResetFiltr"  BorderBrush="White" Background="#77DDE7" Width="60" HorizontalAlignment="Center"  Click="BtnResetFiltr_Click" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btnreset.png" Stretch="Fill"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

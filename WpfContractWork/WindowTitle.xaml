@@ -1,0 +1,41 @@
+﻿<Window x:Class="WpfContractWork.WindowTitle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfContractWork"
+        mc:Ignorable="d"
+        Title="Договорная организация" Background="#F0FFF0" ResizeMode="NoResize" Height="975" Width="1550">
+    <Grid>
+        <StackPanel
+            Orientation="Vertical">
+            <TextBlock Text="Работа на тему"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Margin="30"
+                       Width="500"
+                       Height="50"
+                       FontSize="40"/>
+            <TextBlock Text="Договорная организация"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="40"
+                       Margin="20"
+                       Width="500"
+                       Height="50"
+                       FontFamily="Impact"/>
+            <TextBlock Text="Выполнил: Девяткин Эдуард Максимович"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Width="510"
+                       Margin="30"
+                       FontSize="26"/>
+            <Image Source ="\Resourses\logo.png"
+            Height="150" Margin="30"/>
+            <TextBlock Text="Войти" Width="75" FontSize="26" HorizontalAlignment="Center"></TextBlock>
+            <Button Name="BtnGo" BorderBrush="White" Background="#77DDE7" Width="100" HorizontalAlignment="Center"  Click="BtnGo_Click" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btngo.png" Stretch="Fill"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

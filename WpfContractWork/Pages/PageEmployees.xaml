@@ -1,0 +1,91 @@
+﻿<Page x:Class="WpfContractWork.Pages.PageEmployees"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfContractWork.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="875" d:DesignWidth="1000"
+      Title="PageEmployees" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Grid.Column="1"
+                  Name="dtgEmployee"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                Header="ФИО" Width="*"
+                Binding="{Binding FIO}"/>
+                <DataGridTextColumn
+                Header="Адрес" Width="*"
+                Binding="{Binding adress}"/>
+                <DataGridTextColumn
+                Header="Номер телефона" Width="*"
+                Binding="{Binding phone}"/>
+                <DataGridTextColumn
+                Header="Должность" Width="*"
+                Binding="{Binding post}"/>
+                <DataGridTextColumn
+                Header="Оклад" Width="*"
+                Binding="{Binding salary}"/>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="BtnEdit" BorderBrush="White" Background="#77DDE7" Width="80" HorizontalAlignment="Center"  Click="BtnEdit_Click" Style="{StaticResource RoundButton}">
+                                <Image Source="/Resourses/btnremake.png" Stretch="Fill"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="0"
+                    Orientation="Vertical"
+                    VerticalAlignment="Top">
+            <TextBlock Text="Фильтры" HorizontalAlignment="Left"/>
+            <TextBlock Text="Фильтр по должности"/>
+            <ComboBox Name="CmbPost"
+                      SelectionChanged="CmbPost_SelectionChanged">
+            </ComboBox>
+            <TextBlock Text="Поиск по ФИО"/>
+            <TextBox Name="TxtSearch" Background="AntiqueWhite" Width="800" TextChanged="TxtSearch_TextChanged"/>
+            <TextBlock Text="Сортировка по окладу"
+                           Width="270"/>
+            <RadioButton Content="Минимальная"
+                             Name="RbUp"
+                             Checked="RbUp_Checked"/>
+            <RadioButton Content="Максимальная"
+                             Name="RbDown"
+                             Checked="RbDown_Checked"/>
+
+        </StackPanel>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Bottom">
+            <TextBlock Text="Добавление" HorizontalAlignment="Center"/>
+            <Button Name="BtnAdd" BorderBrush="White" Background="#77DDE7" Width="80" HorizontalAlignment="Center"  Click="BtnAdd_Click" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btnadd.png" Stretch="Fill"/>
+            </Button>
+            <TextBlock Text="Удаление" HorizontalAlignment="Center"/>
+            <Button Name="BtnDelete" BorderBrush="White" Background="#77DDE7" Width="80" HorizontalAlignment="Center"  Click="BtnDelete_Click" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btndelete.png" Stretch="Fill"/>
+            </Button>
+            <TextBlock Text="Сброс фильтров" HorizontalAlignment="Center"/>
+            <Button Name="BtnResetFiltr" BorderBrush="White" Background="#77DDE7" Width="60"    Click="BtnResetFiltr_Click" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btnreset.png" Stretch="Fill"/>
+            </Button>
+            <TextBlock Text="Перейти к списку" HorizontalAlignment="Center"/>
+            <Button Name="BtnToList" BorderBrush="White" Background="#77DDE7" Width="60" Click="BtnToList_Click" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btnlist.png" Stretch="Fill"/>
+            </Button>
+            <TextBlock Text="Перейти к диаграмме" HorizontalAlignment="Center"/>
+            <Button Name="BtnToDiagram" BorderBrush="White" Background="#77DDE7" Width="60" Click="BtnToDiagram_Click" Style="{StaticResource RoundButton}">
+                <Image Source="/Resourses/btndiagram.png" Stretch="Fill"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

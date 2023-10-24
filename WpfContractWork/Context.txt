@@ -1,0 +1,10 @@
+private static Contract_WorkEntities _context;
+
+public static Contract_WorkEntities GetContext()
+        {
+            if (_context == null)
+            {
+                _context = new Contract_WorkEntities();
+            }
+            return _context;
+        }
